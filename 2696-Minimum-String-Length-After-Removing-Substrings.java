@@ -1,10 +1,10 @@
 class Solution {
     public int minLength(String s) {
-        if (!s.contains("AB") && !s.contains("CD")) return s.length();
-        while (s.contains("AB") || s.contains("CD")) {
-            s = s.replaceAll("AB", "");
-            s = s.replaceAll("CD", "");
+        ArrayDeque<Character> stack = new ArrayDeque<>();
+        for (char c : s.toCharArray()){
+            if (!stack.isEmpty() && (stack.peek() == 'A' && c == 'B' || stack.peek() == 'C' && c == 'D')){stack.pop();} 
+            else stack.push(c);
         }
-        return s.length();
+        return stack.size();
     }
 }
